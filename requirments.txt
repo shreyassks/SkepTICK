@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-click                  
-fastapi                
-pydantic               
-pydantic_core          
-starlette              
-uvicorn                
-youtube-transcript-api

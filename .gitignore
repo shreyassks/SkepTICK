@@ -1,2 +1,5 @@
+venv/
+.env
+.idea
 .embold
 __pycache__
