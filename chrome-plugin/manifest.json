@@ -1,8 +1,8 @@
 {  
   "manifest_version": 3,  
-  "name": "Investment Extension",  
-  "version": "1.0",
-  "permissions": ["activeTab", "scripting"],  
+  "name": "Skeptick Extension",  
+  "version": "1.1",
+  "permissions": ["activeTab", "scripting", "storage"],  
   "action": {  
     "default_popup": "popup.html"  
   },  
