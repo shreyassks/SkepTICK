@@ -1,4 +1,1 @@
-chrome.runtime.sendMessage({ url: window.location.href });  
-console.log(url)
-
-
+chrome.runtime.sendMessage({ url: window.location.href });
