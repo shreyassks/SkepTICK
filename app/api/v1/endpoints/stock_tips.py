@@ -3,10 +3,14 @@ from fastapi import APIRouter
 from app.helper import financial_advisor
 from dotenv import load_dotenv
 import matplotlib.pyplot as plt
+from pydantic import BaseModel
 
 load_dotenv()
-
 router = APIRouter()
+
+
+class TipsRequest(BaseModel):
+    username: str
 
 
 def fetch_db(username):
@@ -32,7 +36,7 @@ def create_graph(history, company_name):
 
 @router.get("/stock_tips")
 def stock_tips(request: TipsRequest):
-    company_name = "hdfc bank"  # fetch_db(username)
+    company_name = fetch_db(request.username)
     investment_thesis, history = financial_advisor(company_name)
     stock_chart = create_graph(history, company_name)
     return stock_chart, investment_thesis
