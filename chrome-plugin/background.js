@@ -1,7 +1,7 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(request);
 
-  fetch("http://127.0.0.1:8000/transcribe/breakdown", {
+  fetch("http://127.0.0.1:8000/v1/transcribe/breakdown", {
     method: "POST",
     body: JSON.stringify({ video_url: request.url }),
     headers: {

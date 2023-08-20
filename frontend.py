@@ -1,6 +1,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
-from helper import financial_advisor
+from app.helper import financial_advisor
 
 
 def main():
