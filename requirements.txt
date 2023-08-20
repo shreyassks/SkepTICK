@@ -13,3 +13,8 @@ uvicorn
 streamlit~=1.25.0
 pytube~=15.0.0
 requests~=2.31.0
+youtube-transcript-api
+starlette
+pydantic
+pydantic-core
+click
