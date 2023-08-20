@@ -77,7 +77,7 @@ def get_financial_statements(ticker):
         file.write(valuation_measures)
 
 
-def get_data(company_name, company_ticker, filename="assets/investment.txt"):
+def get_data(company_name, company_ticker, filename="app/assets/investment.txt"):
     news = get_company_news(company_name)
     if news:
         write_news_to_file(news, filename)
@@ -138,7 +138,7 @@ def financial_advisor(request):
     if message.get("function_call"):
         # Parse the arguments from a JSON string to a Python dictionary
         arguments = json.loads(message["function_call"]["arguments"])
-        company_name = arguments["company_name"]
+        company_name = "HDFC Bank"  # arguments["company_name"]
         company_ticker = "HDFCBANK.NS"  # arguments["company_ticker"] + ".NS"
         print(company_ticker)
 

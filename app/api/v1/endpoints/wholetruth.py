@@ -1,4 +1,3 @@
-
 from fastapi import APIRouter
 from dotenv import load_dotenv
 from pydantic import BaseModel
@@ -8,8 +7,6 @@ from langchain.prompts.chat import SystemMessage, HumanMessagePromptTemplate
 from langchain.chat_models import ChatOpenAI
 import json
 
-
-
 load_dotenv()
 router = APIRouter()
 
@@ -17,16 +14,14 @@ router = APIRouter()
 class WholeTruthRequest(BaseModel):
     age: int
 
-def read_DB(db_name:str)->dict:
-    with open(f'{db_name}.json', 'r', encoding='utf-8') as f:
+
+def read_DB(db_name: str) -> dict:
+    with open(f'app/database/{db_name}.json', 'r', encoding='utf-8') as f:
         result = json.load(f)
     return result
 
 
-
-
-def analyse_single_thesis(chat,thesis:str,age:int) -> str:
-
+def analyse_single_thesis(chat, thesis: str, age: int) -> str:
     template = ChatPromptTemplate.from_messages(
         [
             SystemMessage(
@@ -44,25 +39,22 @@ def analyse_single_thesis(chat,thesis:str,age:int) -> str:
         ]
     )
 
-    response= chat(template.format_messages(text=thesis,age=age))
+    response = chat(template.format_messages(text=thesis, age=age))
 
     return response.content
 
-@router.post("/wholetruth")
-def wholetruth(request: WholeTruthRequest)->dict:
-    age = request.age
+
+@router.get("/wholetruth")
+def wholetruth() -> dict:
+    age = 28
     """Iterate over all theses in DB and generate counter-theses for each of them."""
-    all_thesis=read_DB("thesis")
+    all_thesis = read_DB("thesis")
     analysis_dict = {}
-    
+
     chat = ChatOpenAI(temperature=0, model_name='gpt-4', request_timeout=120)
     for thesis in all_thesis["thesis_theoretical"]:
-        thesis_str=list(thesis.values())[0]
-        analysis= analyse_single_thesis(chat,thesis_str,age)
-        analysis_dict[list(thesis.keys())[0]]=thesis_str,analysis
-
+        thesis_str = list(thesis.values())[0]
+        analysis = analyse_single_thesis(chat, thesis_str, age)
+        analysis_dict[list(thesis.keys())[0]] = thesis_str, analysis
 
     return analysis_dict
-
-
-
