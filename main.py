@@ -1,13 +1,14 @@
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-
-
+from app.api.root import root_router
+from app.api.v1.api import v1_router
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 app = FastAPI()
-
+app.include_router(root_router, tags=["Default"])
+app.include_router(v1_router, tags=["V1"])
 
 # class Item(BaseModel):
 #     username: str

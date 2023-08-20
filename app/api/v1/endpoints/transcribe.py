@@ -1,6 +1,6 @@
 import json
 from pytube import extract
-from fastapi import FastAPI
+from fastapi import APIRouter
 
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
@@ -8,10 +8,14 @@ from langchain.schema import HumanMessage, SystemMessage
 from pytube import YouTube
 from youtube_transcript_api import YouTubeTranscriptApi
 from dotenv import load_dotenv
-
+from pydantic import BaseModel
 load_dotenv()
 
-app = FastAPI()
+router = APIRouter()
+
+
+class TranscribeRequest(BaseModel):
+    video_url: str
 
 
 def transcribe(video_url):
@@ -68,16 +72,16 @@ def store_json(response1, response2, username):
     """
     response1["username"], response2["username"] = username, username
 
-    with open(f'./database/claims.json', 'w', encoding='utf-8') as f:
+    with open(f'app/database/claims.json', 'w', encoding='utf-8') as f:
         json.dump(response1, f, ensure_ascii=False, indent=4)
 
-    with open(f'./database/thesis.json', 'w', encoding='utf-8') as f:
+    with open(f'app/database/thesis.json', 'w', encoding='utf-8') as f:
         json.dump(response2, f, ensure_ascii=False, indent=4)
 
 
-@app.post("/transcribe/breakdown")
-def breakdown(video_url):
-    username, transcript = transcribe(video_url)
+@router.post("/transcribe/breakdown")
+def breakdown(request: TranscribeRequest):
+    username, transcript = transcribe(request.video_url)
     claims, thesis = extract_entities(transcript)
     store_json(claims, thesis, username)
-    return claims, thesis
+    return {"claims": claims, "thesis": thesis}

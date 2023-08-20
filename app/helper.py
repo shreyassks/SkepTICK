@@ -47,7 +47,7 @@ def get_stock_evolution(company_name, period="1y"):
     data_string = hist.to_string()
 
     # Append the string to the "investment.txt" file
-    with open("assets/investment.txt", "a") as file:
+    with open("app/assets/investment.txt", "a") as file:
         file.write(f"\nStock Evolution for {company_name}:\n")
         file.write(data_string)
         file.write("\n")
@@ -66,7 +66,7 @@ def get_financial_statements(ticker):
     valuation_measures = str(company.valuation_measures)  # This one might already be a dictionary or string
 
     # Write data to file
-    with open("assets/investment.txt", "a") as file:
+    with open("app/assets/investment.txt", "a") as file:
         file.write("\nBalance Sheet\n")
         file.write(balance_sheet)
         file.write("\nCash Flow\n")
@@ -145,7 +145,7 @@ def financial_advisor(request):
         # Parse the return value from a JSON string to a Python dictionary
         hist = get_data(company_name, company_ticker)
 
-        with open("assets/investment.txt", "r") as file:
+        with open("app/assets/investment.txt", "r") as file:
             content = file.read()[:14000]
 
         second_response = ChatCompletion.create(
