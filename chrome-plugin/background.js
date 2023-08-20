@@ -17,8 +17,43 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     })
     .then((data) => {
       console.log(data);
-      // data.claims.GTBL = []
-      // data.thesis.thesis_
+      chrome.storage.local.set(
+        { transcibed: data, url: video_url },
+        function () {
+          console.log("Transcibe found!");
+          console.log("calling whole truth");
+          getWholeTruth();
+          getStockTip();
+        }
+      );
     })
     .catch((error) => console.error("Error:", error));
 });
+
+function getWholeTruth() {
+  fetch("http://127.0.0.1:8000/wholetruth")
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error("Request failed with status " + response.status);
+      }
+    })
+    .then((data) => {
+      console.log(data);
+    });
+}
+
+function getStockTip() {
+  fetch("http://127.0.0.1:8000/stock_tips")
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error("Request failed with status " + response.status);
+      }
+    })
+    .then((data) => {
+      console.log(data);
+    });
+}
