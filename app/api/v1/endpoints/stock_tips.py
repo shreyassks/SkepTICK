@@ -56,11 +56,11 @@ def stock_tips():
         "Goal 4) Use the same ticker symbol, to get stock analysis for the company using Stock analysis tool"
     )
 
-    prompt= prompt_template.format(company_name=company_name)   
+    prompt = prompt_template.format(company_name=company_name)
     
     investment_thesis=action_agent.run(prompt)
-    print("OUTPUT FROM AGENT",investment_thesis)
+    print("OUTPUT FROM AGENT", investment_thesis)
 
-    investment_thesis, history = financial_advisor(company_name)
+    history = financial_advisor(company_name)
     stock_chart = create_graph(history, company_name)
     return stock_chart, investment_thesis
