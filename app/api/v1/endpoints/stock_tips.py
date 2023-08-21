@@ -36,7 +36,7 @@ def create_graph(history, company_name):
 
 @router.get("/stock_tips")
 def stock_tips():
-    company_name = "HDFC Bank"  # fetch_db("Rahul Jain")
+    company_name = "Gujarat Themis Biosyn Ltd"  # fetch_db("Rahul Jain")
     investment_thesis, history = financial_advisor(company_name)
     stock_chart = create_graph(history, company_name)
     return stock_chart, investment_thesis

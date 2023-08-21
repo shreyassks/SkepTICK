@@ -138,8 +138,8 @@ def financial_advisor(request):
     if message.get("function_call"):
         # Parse the arguments from a JSON string to a Python dictionary
         arguments = json.loads(message["function_call"]["arguments"])
-        company_name = "HDFC Bank"  # arguments["company_name"]
-        company_ticker = "HDFCBANK.NS"  # arguments["company_ticker"] + ".NS"
+        company_name = "Gujarat Themis Biosyn Ltd"  # arguments["company_name"]
+        company_ticker = "GUJTHEM.BO"  # arguments["company_ticker"] + ".NS"
         print(company_ticker)
 
         # Parse the return value from a JSON string to a Python dictionary
