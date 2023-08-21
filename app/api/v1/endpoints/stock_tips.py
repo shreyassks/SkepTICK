@@ -1,4 +1,6 @@
 import json
+import os.path
+
 from fastapi import APIRouter
 from app.helper import financial_advisor
 from dotenv import load_dotenv
@@ -47,7 +49,7 @@ def stock_tips():
     # role of agent is to get investment thesis based on factual data from news source, stock history, balance sheets
 
     llm = OpenAI(temperature=0,streaming=True,callbacks=[FinalStreamingStdOutCallbackHandler()],verbose=True)
-    action_agent= ActionAgent(llm)
+    action_agent = ActionAgent(llm)
     
     prompt_template = PromptTemplate.from_template(
         "Goal 1) Given the compnay name {company_name}, get news articles about the company using Company news tool"
@@ -63,4 +65,5 @@ def stock_tips():
 
     history = financial_advisor(company_name)
     stock_chart = create_graph(history, company_name)
-    return stock_chart, investment_thesis
+    stock_chart_abs_path = os.path.abspath(stock_chart)
+    return stock_chart_abs_path, investment_thesis
