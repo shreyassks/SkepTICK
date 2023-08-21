@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
   <body>
-    <h1>Welcome to Skeptick</h1>
     <div id="not-registered">
+      <img src="./skepticklogo.png" />
+      <h1>Welcome to Skeptick</h1>
       <h3>
-        YOu are not registered, please register to get customized experience
+        You are not registered, please register to get customized experience
       </h3>
       <button id="register-button">Register</button>
     </div>
     <div id="registered">
-      <div id="not-transcribed">
-        The transcript will be shown here when the youtube video is detected
+      <div id="youtube-watch">
+        <div id="not-transcribed">
+          <img src="./skepticklogo.png" />
+          <button id="analyze-button">Get the Skeptick analysis</button>
+        </div>
+        <div id="transcribed" style="display: none">
+          <div class="nav-bar">
+            <button class="nav-button nav-selected" id="thesis-button">
+              Thesis Suggested
+            </button>
+            <button class="nav-button" id="claims-button">Stock claims</button>
+            <button class="nav-button" id="stock-tips-button">
+              Stock claim verification
+            </button>
+          </div>
+
+          <div id="claims" class="tab" style="display: none">
+            <div id="claims-list"></div>
+          </div>
+          <div id="thesis" class="tab">
+            <div id="thesis-list"></div>
+          </div>
+          <div id="stock-tips" class="tab" style="display: none">
+            Extracting past stock data to validate claims ...
+          </div>
+          <br />
+          <br />
+          <img src="./skepticklogo.png" />
+        </div>
       </div>
-      <div id="transcribed"></div>
+      <div id="not-youtube-watch">
+        <img src="./skepticklogo.png" />
+        <p>Be vigilant of investment advices</p>
+        <p id="visit-p">Visit a youtube video to analyze it</p>
+      </div>
     </div>
     <script src="popup.js"></script>
   </body>

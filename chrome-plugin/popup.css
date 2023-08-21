@@ -1,0 +1,93 @@
+body {
+    width: 40em;
+    height: 40em;
+    padding: 0;
+    margin: 0;
+}
+
+#register-button {
+    width: 20%;
+    padding: 0.5em;
+    font-size: 1.3em;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 400;
+    color: white;
+    border: none;
+    background-color: #97d7cc ;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-shadow: rgb(194, 194, 194) 2px 2px;
+    margin: 2em auto;
+}
+
+#not-registered {
+    text-align: center;
+}
+
+#not-registered h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: auto;
+}
+
+#not-youtube-watch {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#visit-p {
+    font-size: 0.9rem;
+}
+
+#analyze-button {
+    display: block;
+    width: 50%;
+    padding: 1em;
+    font-size: 1.3em;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 400;
+    color: white;
+    border: none;
+    background-color: #97d7cc ;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-shadow: rgb(194, 194, 194) 2px 2px;
+    margin: 3em auto;
+
+}
+
+#not-transcribed {
+    text-align: center;
+}
+
+.analyze-subtitle {
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+.nav-bar {
+    background-color: #97d7cc;
+    padding: 0.5em;
+}
+
+.nav-button {
+    margin: 0 0.5em;
+    border-radius: 10px;
+    border: 0;
+    padding: 0.3em 0.5em;
+}
+
+.nav-selected {
+    font-weight: bold;
+    background-color: white;
+}
+
+.tab {
+    font-size: 1.2em;
+    margin: 0 2em;
+}
+
+.wholetruth {
+    background-color: #97d7cc;
+}
+

@@ -2,18 +2,23 @@
 <html>
   <head>
     <title>Skeptick | Register</title>
+    <link rel="stylesheet" href="register.css" />
   </head>
   <body>
+    <div id="header">
+      <img src="./skepticklogo.png" />
+    </div>
+
     <h1>Welcome to Skeptick</h1>
     <h2>Create a user for customized experience</h2>
     <form id="register-form">
-      <label for="username">Username:</label><br />
-      <input type="text" id="username" name="username" /><br />
-      <label for="amount">Investment Amount:</label><br />
-      <input type="text" id="amount" name="amount" /><br />
-      <label for="age">Enter you Age: </label>
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" />
+      <label for="amount">Your salary p.a</label>
+      <input type="text" id="amount" name="amount" />
+      <label for="age">Enter you Age </label>
       <input type="text" id="age" name="age" />
-      <input type="submit" value="Submit" />
+      <input id="register-button" type="submit" value="Submit" />
     </form>
     <script src="register.js"></script>
   </body>
