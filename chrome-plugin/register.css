@@ -1,0 +1,55 @@
+body {
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h2 {
+    font-family: serif;
+    font-weight: lighter;
+}
+
+form {
+    width: 30em;
+    margin: auto;
+    margin-top: 2em;
+    text-align: left;
+}
+
+label {
+    font-size: 1.4em;
+    font-family: serif;
+    display: block;
+    margin: 0.5em;
+    margin-left: 0;
+    margin-top: 1.5em;
+}
+
+
+input {
+    padding: 0.5em;
+    font-size: 1.2em;
+    font-family: 'Kanit', sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    font-weight: lighter;
+    display: block;
+}
+
+#register-button {
+    width: 100%;
+    padding: 0.5em;
+    font-size: 1.3em;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 400;
+    color: white;
+    border: none;
+    background-color: #97d7cc ;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-shadow: rgb(194, 194, 194) 2px 2px;
+    margin: 2em auto;
+}
