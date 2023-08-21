@@ -1,13 +1,13 @@
 {
     "thesis_theoretical": [
         {
-            "Thesis0": "The influencer suggests that the company's strong fundamentals and high growth rate are the key reasons for its impressive returns."
+            "Thesis0": "The influencer believes that the company's strong fundamentals and high growth rate are the key reasons for its impressive returns."
         },
         {
-            "Thesis1": "The influencer also points out that the stock's current PE ratio is lower than the Nifty Pharma PE, suggesting that it may be undervalued."
+            "Thesis1": "He suggests that the stock is still undervalued, despite its significant growth, and has the potential to become a mid-cap or large-cap stock."
         },
         {
-            "Thesis2": "The influencer also uses the PEG ratio to argue that the stock is undervalued, as a PEG ratio of less than one is generally considered to indicate an undervalued stock."
+            "Thesis2": "He also highlights the importance of considering factors such as the company's business model, management capabilities, upcoming milestones, and future outlook when conducting a comprehensive fundamental analysis."
         }
     ],
     "thesis_quantitative": [
@@ -15,13 +15,16 @@
             "Thesis0": "In the last five years, the stock has given close to 2200% returns."
         },
         {
-            "Thesis1": "In the last few years, the company's revenues have been growing at a rate of 26-30%, and its earnings per share have been growing at a rate of 44-32%."
+            "Thesis1": "The company's revenues have been growing at a rate of 26-30%."
         },
         {
-            "Thesis2": "The stock's current PE ratio is 19, compared to the Nifty Pharma PE of 31."
+            "Thesis2": "The company's earnings per share has been growing at a rate of 44-32%."
         },
         {
-            "Thesis3": "The stock's PEG ratio is currently 0.27."
+            "Thesis3": "The stock's PE is currently at 19, compared to Nifty Pharma PE which is roughly at 31."
+        },
+        {
+            "Thesis4": "The PEG ratio of this stock is currently 0.27."
         }
     ],
     "username": "Rahul Jain"

@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from app.agents.agent import ActionAgent
 from langchain.llms import OpenAI
 from langchain import PromptTemplate
+from pathlib import Path
 from langchain.callbacks.streaming_stdout_final_only import (
     FinalStreamingStdOutCallbackHandler,
 )
@@ -38,9 +39,10 @@ def create_graph(history, company_name):
     plt.xlabel("Date")
     plt.ylabel("Stock Price")
 
-    image_path = f"app/assets/{company_name}.png"
-    plt.savefig(image_path)
-    return image_path
+    directory = os.path.join(Path(__file__).parent.parent.parent.parent.parent, "chrome-plugin/images")
+    image_name = directory + "/image1.png"
+    plt.savefig(image_name)
+    return image_name
 
 
 @router.get("/stock_tips")
@@ -65,5 +67,4 @@ def stock_tips():
 
     history = financial_advisor(company_name)
     stock_chart = create_graph(history, company_name)
-    stock_chart_abs_path = os.path.abspath(stock_chart)
-    return stock_chart_abs_path, investment_thesis
+    return stock_chart, investment_thesis
