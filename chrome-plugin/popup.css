@@ -71,7 +71,7 @@ body {
 }
 
 .nav-button {
-    margin: 0 0.5em;
+    margin: 0.5em 0.5em;
     border-radius: 10px;
     border: 0;
     padding: 0.3em 0.5em;
@@ -89,5 +89,9 @@ body {
 
 .wholetruth {
     background-color: #97d7cc;
+}
+
+.width-100 {
+    width: 100%;
 }
 

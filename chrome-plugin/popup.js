@@ -137,8 +137,9 @@ const analyze = (currentTabUrl) => {
       console.log("Transcribe found !");
       isTranscribedDataLoaded = true;
       updateTranscribeDOM(data);
-      getWholeTruth(); // this also updates the transcribe dom
-      getStockTip(); // this also updates the transcribe dom
+      getWholeTruth();
+      getStockTip();
+      getBackTest();
     })
     .catch((error) => console.error("Error:", error));
 };
@@ -172,10 +173,19 @@ function getStockTip() {
     .then((data) => {
       console.log(data);
       document.getElementById("stock-tips").innerHTML = `
-			<img src="${data[0]}"/>
-			<p>${data[1]}</p>
+			<img class="width-100" src="images/${data[0]}"/>
+			<p><pre>${data[1]}</pre></p>
 			`;
     });
+}
+
+function getBackTest() {
+  setTimeout(() => {
+    document.getElementById("back-test").innerHTML = `
+			<img class="width-100" src="images/backtest.png"/>
+			<p>The above graph shows the strategy performance as compared to <a href="https://en.wikipedia.org/wiki/NIFTY_50">Nifty 50</a></p>
+			`;
+  }, 20000);
 }
 
 const updateTranscribeDOM = (data) => {
@@ -198,59 +208,56 @@ document.addEventListener("DOMContentLoaded", function () {
   const claimsButton = document.getElementById("claims-button");
   const thesisButton = document.getElementById("thesis-button");
   const stockTipsButton = document.getElementById("stock-tips-button");
+  const backTestButton = document.getElementById("back-test-button");
 
-  claimsButton.addEventListener("click", function (evt) {
-    console.log("event", evt);
-    openCity(evt, "claims");
-    document.getElementById("claims-button").classList.remove("nav-selected");
-    document.getElementById("thesis-button").classList.remove("nav-selected");
-    document
-      .getElementById("stock-tips-button")
-      .classList.remove("nav-selected");
-    document.getElementById("claims-button").classList.add("nav-selected");
+  claimsButton.addEventListener("click", function () {
+    openCity("claims");
+    claimsButton.classList.remove("nav-selected");
+    thesisButton.classList.remove("nav-selected");
+    stockTipsButton.classList.remove("nav-selected");
+    backTestButton.classList.remove("nav-selected");
+
+    claimsButton.classList.add("nav-selected");
   });
 
-  thesisButton.addEventListener("click", function (evt) {
-    openCity(evt, "thesis");
-    document.getElementById("claims-button").classList.remove("nav-selected");
-    document.getElementById("thesis-button").classList.remove("nav-selected");
-    document
-      .getElementById("stock-tips-button")
-      .classList.remove("nav-selected");
-    document.getElementById("thesis-button").classList.add("nav-selected");
+  thesisButton.addEventListener("click", function () {
+    openCity("thesis");
+    claimsButton.classList.remove("nav-selected");
+    thesisButton.classList.remove("nav-selected");
+    stockTipsButton.classList.remove("nav-selected");
+    backTestButton.classList.remove("nav-selected");
+
+    thesisButton.classList.add("nav-selected");
   });
 
-  stockTipsButton.addEventListener("click", function (evt) {
-    openCity(evt, "stock-tips");
-    document.getElementById("claims-button").classList.remove("nav-selected");
-    document.getElementById("thesis-button").classList.remove("nav-selected");
-    document
-      .getElementById("stock-tips-button")
-      .classList.remove("nav-selected");
-    document.getElementById("stock-tips-button").classList.add("nav-selected");
+  stockTipsButton.addEventListener("click", function () {
+    openCity("stock-tips");
+    claimsButton.classList.remove("nav-selected");
+    thesisButton.classList.remove("nav-selected");
+    stockTipsButton.classList.remove("nav-selected");
+    backTestButton.classList.remove("nav-selected");
+
+    stockTipsButton.classList.add("nav-selected");
+  });
+
+  backTestButton.addEventListener("click", function () {
+    openCity("back-test");
+    claimsButton.classList.remove("nav-selected");
+    thesisButton.classList.remove("nav-selected");
+    stockTipsButton.classList.remove("nav-selected");
+    backTestButton.classList.remove("nav-selected");
+
+    backTestButton.classList.add("nav-selected");
   });
 });
 
-function openCity(evt, cityName) {
-  console.log("event is", evt);
-  console.log("city name is", cityName);
+function openCity(cityName) {
   var i;
   var x = document.getElementsByClassName("tab");
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";
   }
-  // tablinks = document.getElementsByClassName("tablink");
-  // for (i = 0; i < x.length; i++) {
-  //   tablinks[i].target.className = tablinks[i].target.className.replace(
-  //     "nav-selected",
-  //     ""
-  //   );
-  // }
-
   document.getElementById(cityName).style.display = "block";
-
-  // console.log("eventis", evt);
-  // evt.target.className += " nav-selected";
 }
 
 // Function to create a list and insert it into the 'thesis' div

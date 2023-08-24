@@ -1,13 +1,13 @@
 {
     "thesis_theoretical": [
         {
-            "Thesis0": "The influencer believes that the company's strong fundamentals and high growth rate are the key reasons for its impressive returns."
+            "Thesis0": "The influencer suggests that the company's strong fundamentals and high growth rate are the key reasons for its impressive returns."
         },
         {
-            "Thesis1": "He suggests that the stock is still undervalued, despite its significant growth, and has the potential to become a mid-cap or large-cap stock."
+            "Thesis1": "The influencer also points out that despite the stock's significant growth, it is still undervalued based on its PE and PEG ratios."
         },
         {
-            "Thesis2": "He also highlights the importance of considering factors such as the company's business model, management capabilities, upcoming milestones, and future outlook when conducting a comprehensive fundamental analysis."
+            "Thesis2": "The influencer suggests that the company has the potential to become a mid or large cap stock in the future."
         }
     ],
     "thesis_quantitative": [
@@ -15,7 +15,7 @@
             "Thesis0": "In the last five years, the stock has given close to 2200% returns."
         },
         {
-            "Thesis1": "The company's revenues have been growing at a rate of 26-30%."
+            "Thesis1": "In the last few years, the company's revenues have been growing at a rate of 26-30%."
         },
         {
             "Thesis2": "The company's earnings per share has been growing at a rate of 44-32%."
@@ -24,7 +24,7 @@
             "Thesis3": "The stock's PE is currently at 19, compared to Nifty Pharma PE which is roughly at 31."
         },
         {
-            "Thesis4": "The PEG ratio of this stock is currently 0.27."
+            "Thesis4": "The PEG ratio of the stock is currently 0.27."
         }
     ],
     "username": "Rahul Jain"
