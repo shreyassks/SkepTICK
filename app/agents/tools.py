@@ -106,7 +106,7 @@ class Tools():
         return search.run
 
     def get_company_news(self,company_name):
-        """Use this funciton ONLY to get company news. Input should be the company name. For example, `Apple`."""
+        """Use this functon ONLY to get company news. Input should be the company name. For example, `Apple`."""
         params = {
             "engine": "google",
             "tbm": "nws",
@@ -184,8 +184,6 @@ class Tools():
 
 
     def get_stock_data(self, company_ticker):
-
-
         hist = self.get_stock_evolution(company_ticker)
         self.get_financial_statements(company_ticker)
         return hist

@@ -1,31 +1,5 @@
 {
-    "thesis_theoretical": [
-        {
-            "Thesis0": "The influencer believes that the company's strong fundamentals and high growth rate are the key reasons for its impressive returns."
-        },
-        {
-            "Thesis1": "He suggests that the stock is still undervalued, despite its significant growth, and has the potential to become a mid-cap or large-cap stock."
-        },
-        {
-            "Thesis2": "He also highlights the importance of considering factors such as the company's business model, management capabilities, upcoming milestones, and future outlook when conducting a comprehensive fundamental analysis."
-        }
-    ],
-    "thesis_quantitative": [
-        {
-            "Thesis0": "In the last five years, the stock has given close to 2200% returns."
-        },
-        {
-            "Thesis1": "The company's revenues have been growing at a rate of 26-30%."
-        },
-        {
-            "Thesis2": "The company's earnings per share has been growing at a rate of 44-32%."
-        },
-        {
-            "Thesis3": "The stock's PE is currently at 19, compared to Nifty Pharma PE which is roughly at 31."
-        },
-        {
-            "Thesis4": "The PEG ratio of this stock is currently 0.27."
-        }
-    ],
+    "thesis_theoretical": "The influencer claims that GTBL is a high-growth, undervalued small-cap pharma stock with strong fundamentals and low risk. The company's high revenue growth, increasing margins, and growing earnings per share are cited as reasons for its strong performance. The stock's low PE ratio, PEG ratio, and high price to intrinsic value rank suggest it is undervalued. The company's low debt to equity ratio and high promoter holding indicate low risk. The influencer suggests that the stock has the potential to become a mid-cap or large-cap stock in the future.",
+    "thesis_quantitative": "The influencer provides several key trading metrics to support their claims. Over the last five years, the stock has given returns of approximately 2200%. The company's revenues have been growing at rates of 26-30%, and its earnings per share have been growing at rates of 44-32%. The stock's PE ratio is currently 19, compared to the Nifty Pharma PE of 31. The PEG ratio of the stock is less than one, and its price to intrinsic value rank is high, suggesting it is undervalued. The company's debt to equity ratio is low, and its promoter holding is high, indicating low risk.",
     "username": "Rahul Jain"
 }

@@ -3,3 +3,4 @@ venv/
 .idea
 .embold
 __pycache__
+.DS_Store
