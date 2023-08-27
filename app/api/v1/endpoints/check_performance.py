@@ -10,15 +10,20 @@ from app.agents.agent import ActionAgent
 from langchain.llms import OpenAI
 from langchain import PromptTemplate
 from pathlib import Path
-from langchain.callbacks.streaming_stdout_final_only import (
-    FinalStreamingStdOutCallbackHandler,
-)
-#------------------------
+import matplotlib.pyplot as plt
 import pandas as pd 
 import yfinance as yf 
 import ta 
 from backtesting import Backtest, Strategy
 from backtesting.lib import crossover 
+
+load_dotenv()
+router = APIRouter()
+
+class PerfRequest(BaseModel):
+        ticker: str
+        duration: int 
+        implement_strat: str
 
 class SMAcross(Strategy):
       def init(self):
@@ -32,19 +37,67 @@ class SMAcross(Strategy):
           elif crossover(self.sma2,self.sma1):
             self.sell()
 
-df=yf.download('GUJTHEM.BO', period='3y')
-bt = Backtest(df, SMAcross, cash=10000, commission=0.002, exclusive_orders=True) 
-output = bt.run()           
-#bt.plot()
+class SMAcross1(Strategy):
+      def init(self):
+          close=self.data.Close 
+          self.sma1 = self.I(ta.trend.sma_indicator, pd.Series(close), 10)
+          self.sma2 = self.I(ta.trend.sma_indicator, pd.Series(close), 100)
+    
+      def next(self):
+          if crossover(self.sma1,self.sma2):
+            self.buy()
+          elif crossover(self.sma2,self.sma1):
+            self.sell()
 
-nifty_50_data = yf.download('^NSEI', period='3y')
-nifty_50_cagr = ((nifty_50_data.tail(1)['Close'].values[0] / nifty_50_data.head(1)['Close'].values[0]) ** (1 / 3) - 1)*100
-strategy_cagr = output['Return (Ann.) [%]']
+class SMAcross2(Strategy):
+      def init(self):
+          close=self.data.Close 
+          self.sma1 = self.I(ta.trend.sma_indicator, pd.Series(close), 20)
+          self.sma2 = self.I(ta.trend.sma_indicator, pd.Series(close), 30)
+    
+      def next(self):
+          if crossover(self.sma1,self.sma2):
+            self.buy()
+          elif crossover(self.sma2,self.sma1):
+            self.sell()
 
-plot_nifty_cagr = ((plot_df.tail(1)['Nifty50'].values[0] / plot_df.head(1)['Nifty50'].values[0]) ** (1 / 3) - 1)*100
+class RSI_Strategy(Strategy):
+    def init(self):
+        close = self.data.Close
+        self.rsi = self.I(ta.momentum.RSIIndicator, pd.Series(close), 14)
+    
+    def next(self):
+        if self.rsi[-1] > 70:  # Overbought condition
+            self.sell()
+        elif self.rsi[-1] < 30:  # Oversold condition
+            self.buy()            
 
 
-def save_graph(output, nifty_50_data, strategy_cagr, nifty_50_cagr):
+class BollingerBandsStrategy(Strategy):
+    def init(self):
+        close = self.data.Close
+        self.bollinger = self.I(ta.volatility.BollingerBands, pd.Series(close), window=20)
+    
+    def next(self):
+        if cross(self.data.Close, self.bollinger.bollinger_l):
+            self.buy()
+        elif cross(self.bollinger.bollinger_h, self.data.Close):
+            self.sell()
+
+class BreakoutStrategy(Strategy):
+    def init(self):
+        high = self.data.High
+        low = self.data.Low
+        close = self.data.Close
+        self.atr = self.I(ta.volatility.AverageTrueRange, high, low, close, window=14)
+    
+    def next(self):
+        if self.data.Close[-1] > self.data.Close[-2] + self.atr[-1]:
+            self.buy()
+        elif self.data.Close[-1] < self.data.Close[-2] - self.atr[-1]:
+            self.sell()
+
+def save_graph(output, nifty_50_data, strategy_cagr, nifty_50_cagr, implement_strat):
     strategy_series = output['_equity_curve'][['Equity']].reset_index().rename(columns={'index': 'Date', 'Equity': 'Strategy'})
     nifty_50_series = nifty_50_data['Close'].reset_index().rename(columns={'Close': 'Nifty50_Index'})
     plot_df = nifty_50_series.merge(strategy_series, how='inner', on=['Date'])
@@ -53,7 +106,7 @@ def save_graph(output, nifty_50_data, strategy_cagr, nifty_50_cagr):
     plot_df['Nifty50_return']=(plot_df['Nifty50_Index']-plot_df['Nifty50_Index'].shift(1))/plot_df['Nifty50_Index'].shift(1)
     
     # Calculate Nifty 50 investment values
-    initial_investment = 10000
+    initial_investment = 100000
     investment_values_nifty = [initial_investment]
     for i in range(1, len(plot_df)):
         investment_value = investment_values_nifty[i - 1] * (1 + plot_df['Nifty50_return'][i])
@@ -80,91 +133,51 @@ def save_graph(output, nifty_50_data, strategy_cagr, nifty_50_cagr):
     plt.title("Nifty 50 and Strategy Performance")
     plt.grid()
     plt.legend()
-    
-    image_name = "Performance_image1.png"
-    plt.savefig(image_name)
-    plt.close()  # Close the plot to free resources
-    
-    return image_name
-
-
-def save_graph(output, nifty_50_data):
-    strategy_series=output['_equity_curve'][['Equity']].reset_index().rename(columns={'index':'Date', 'Equity':'Strategy'})
-    nifty_50_series=nifty_50_data['Close'].reset_index().rename(columns={'Close':'Nifty50_Index'})
-    plot_df=nifty_50_series.merge(strategy_series, how='inner', on=['Date'])
-    plot_df.index=plot_df['Date']
-    plot_df['Nifty50_lag']=plot_df['Nifty50_Index'].shift(1)
-    plot_df['Nifty50_return']=(plot_df['Nifty50_Index']-plot_df['Nifty50_Index'].shift(1))/plot_df['Nifty50_Index'].shift(1)
-    initial_investment = 10000
-    investment_values = [initial_investment]
-    for i in range(1, len(plot_df)):
-        investment_value = investment_values[i - 1] * (1 + plot_df['Nifty50_return'][i])
-        investment_values.append(investment_value)
-    # Add investment values to the DataFrame
-    plot_df['Nifty50'] = investment_values
-    plt.switch_backend('Agg')
-    plot_df[['Nifty50', 'Strategy']].plot(grid=True, figsize=(12, 8))
-    #plt.title(f"{company_name} Stock Price")
-    plt.xlabel("Date")
-    plt.ylabel("Investment over the time")
-    #directory = os.path.join(Path(__file__).parent.parent.parent.parent.parent, "chrome-plugin/images")
-    #image_name = directory + "/Performance_image1.png"
-    image_name = "Performance_image1.png"
-    plt.savefig(image_name)
-    return image_name
-
-#------------------------
-
-load_dotenv()
-router = APIRouter()
-
-
-class TipsRequest(BaseModel):
-    username: str
-
-
-def fetch_db(username):
-    with open(f'app/database/claims.json', 'r', encoding='utf-8') as f:
-        claims = json.load(f)
-    company_name = list(claims.keys())
-    return company_name[0]
-
-
-def create_graph(history, company_name):
-    hist_selected = history[['Open', 'Close']]
-
-    plt.switch_backend('Agg')
-    hist_selected.plot(kind='line')
-    plt.title(f"{company_name} Stock Price")
-    plt.xlabel("Date")
-    plt.ylabel("Stock Price")
 
     directory = os.path.join(Path(__file__).parent.parent.parent.parent.parent, "chrome-plugin/images")
-    image_name = directory + "/image1.png"
+    image_name = directory + f"/{implement_strat}.png"    
     plt.savefig(image_name)
+    plt.close()  # Close the plot to free resources    
     return image_name
 
+@router.post("/check_performance")
+def breakdown(request: PerfRequest):
+    ticker = request.ticker
+    duration = request.duration
+    implement_strat = request.implement_strat
 
-@router.get("/stock_tips")
-def stock_tips():
-    company_name = "Gujarat Themis Biosyn Ltd"  # fetch_db("Rahul Jain")
-    # role of agent is to get investment thesis based on factual data from news source, stock history, balance sheets
+    strategies = {
+    'SMAcross': SMAcross,
+    'RSI_Strategy': SMAcross1,
+    'BreakoutStrategy': SMAcross2,
+    'BollingerBandsStrategy': SMAcross1
+    }
+    image_name=''
+    nifty_50_cagr=''
+    strategy_cagr=''
+    volatility_percent='' 
+    sharpe_ratio='' 
+    sortino_ratio=''
+    max_drawdown_percent=''
+    #print('Strat:',strategies[implement_strat])
+    try:
+        selected_strategy = strategies[implement_strat]
+        df=yf.download(ticker, period=f'{duration}y')
+        bt = Backtest(df, selected_strategy, cash=100000, commission=0.002, exclusive_orders=True) 
+        output = bt.run()           
+        nifty_50_data = yf.download('^NSEI', period=f'{duration}y')
+        nifty_50_cagr = ((nifty_50_data.tail(1)['Close'].values[0] / nifty_50_data.head(1)['Close'].values[0]) ** (1 / 3) - 1)*100
+        strategy_cagr = output['Return (Ann.) [%]']
 
-    llm = OpenAI(temperature=0,streaming=True,callbacks=[FinalStreamingStdOutCallbackHandler()],verbose=True)
-    action_agent = ActionAgent(llm)
-    
-    prompt_template = PromptTemplate.from_template(
-        "Goal 1) Given the compnay name {company_name}, get news articles about the company using Company news tool"
-        "Goal 2) Get the ticker or trading symbol for {company_name}"
-        "Goal 3) Once you have ticker symbol, get the stock history for the company using Stock history tool"
-        "Goal 4) Use the same ticker symbol, to get stock analysis for the company using Stock analysis tool"
-    )
+        image_name=save_graph(output, nifty_50_data, strategy_cagr, nifty_50_cagr, implement_strat)
 
-    prompt = prompt_template.format(company_name=company_name)
-    
-    investment_thesis=action_agent.run(prompt)
-    print("OUTPUT FROM AGENT", investment_thesis)
+        volatility_percent = output['Volatility (Ann.) [%]']
+        sharpe_ratio = output['Sharpe Ratio']
+        sortino_ratio = output['Sortino Ratio']
+        max_drawdown_percent = output['Max. Drawdown [%]']
 
-    history = financial_advisor(company_name)
-    stock_chart = create_graph(history, company_name)
-    return stock_chart, investment_thesis
+    except Exception as e:
+        print("An error occurred:", e)
+    return {"image_name": image_name, "nifty_50_cagr": nifty_50_cagr, "strategy_cagr":strategy_cagr,
+            "volatility_percent": volatility_percent, "sharpe_ratio": sharpe_ratio, "sortino_ratio":sortino_ratio,
+            "max_drawdown_percent": max_drawdown_percent}
