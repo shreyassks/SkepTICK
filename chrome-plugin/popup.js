@@ -109,11 +109,13 @@ const analyze = (currentTabUrl) => {
       '<p>SkepTICK agent at work ...</p><p  class="analyze-subtitle">Preparing ..</p>';
   }, step3Time);
 
-  // const step4Time = step3Time + 1000 + Math.random() * 1000; --for testing locally
+  // const step4Time = step3Time + 1000 + Math.random() * 1000;
   // setTimeout(function () {
   //   updateTranscribeDOM(data);
-  //   getWholeTruth(); // this also updates the transcribe dom
-  //   getStockTip(); // this also updates the transcribe dom
+  //   const keys = Object.keys(data.claims);
+  //   const filteredKeys = keys.filter((key) => key !== "username");
+
+  //   getCredibility(data.thesis.username, filteredKeys);
   // }, 0);
 
   fetch("http://127.0.0.1:8000/v1/transcribe/breakdown", {
@@ -137,7 +139,7 @@ const analyze = (currentTabUrl) => {
       getWholeTruth();
       getStockTip();
 
-      const keys = Object.keys(data);
+      const keys = Object.keys(data.claims);
       const filteredKeys = keys.filter((key) => key !== "username");
 
       getCredibility(data.thesis.username, filteredKeys);
