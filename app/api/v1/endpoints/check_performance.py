@@ -174,6 +174,9 @@ def breakdown(request: PerfRequest):
     sharpe_ratio = ''
     sortino_ratio = ''
     max_drawdown_percent = ''
+
+    print('performing backtest for', ticker, 'for duration',
+          duration, 'with strategy', implement_strat)
     # print('Strat:',strategies[implement_strat])
     try:
         selected_strategy = strategies[implement_strat]
@@ -196,6 +199,11 @@ def breakdown(request: PerfRequest):
 
     except Exception as e:
         print("An error occurred:", e)
+
+    print("Ratios found - ", {"image_name": image_name, "nifty_50_cagr": nifty_50_cagr, "strategy_cagr": strategy_cagr,
+                              "volatility_percent": volatility_percent, "sharpe_ratio": sharpe_ratio, "sortino_ratio": sortino_ratio,
+                              "max_drawdown_percent": max_drawdown_percent})
+
     return {"image_name": image_name, "nifty_50_cagr": nifty_50_cagr, "strategy_cagr": strategy_cagr,
             "volatility_percent": volatility_percent, "sharpe_ratio": sharpe_ratio, "sortino_ratio": sortino_ratio,
             "max_drawdown_percent": max_drawdown_percent}

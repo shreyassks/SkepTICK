@@ -4,10 +4,10 @@
             "Thesis0": "The influencer suggests that the company's strong fundamentals and high growth rate are the key reasons for its impressive returns."
         },
         {
-            "Thesis1": "The influencer also suggests that despite the significant increase in the stock's price, it still has potential for further growth due to its relatively low PE and PEG ratios."
+            "Thesis1": "The influencer also suggests that despite the significant increase in the stock's price, it could still be undervalued given its PE ratio and PEG ratio."
         },
         {
-            "Thesis2": "The influencer also suggests that the company could potentially transition from a small cap to a mid or large cap stock."
+            "Thesis2": "The influencer believes that the company has the potential to become a mid-cap or large-cap stock in the future."
         }
     ],
     "thesis_quantitative": [
@@ -15,19 +15,16 @@
             "Thesis0": "In the last five years, the stock has given close to 2200% returns."
         },
         {
-            "Thesis1": "The company's revenues have been growing at a rate of 26-30%."
+            "Thesis1": "In the last few years, the company's revenues have been growing at a rate of 26-30%, and its earnings per share have been growing at a rate of 44-32%."
         },
         {
-            "Thesis2": "The company's earnings per share has been growing at a rate of 44-32%."
+            "Thesis2": "The stock's price has increased from 55 Rupees to roughly 700 rupees."
         },
         {
-            "Thesis3": "The stock's price has increased from 55 Rupees to roughly 700 rupees."
+            "Thesis3": "The stock's PE ratio is currently 19, compared to the Nifty Pharma PE of roughly 31."
         },
         {
-            "Thesis4": "The stock's PE ratio is currently 19, compared to Nifty Pharma PE which is roughly at 31."
-        },
-        {
-            "Thesis5": "The stock's PEG ratio is currently 0.27."
+            "Thesis4": "The stock's PEG ratio is currently 0.27."
         }
     ],
     "username": "Rahul Jain"

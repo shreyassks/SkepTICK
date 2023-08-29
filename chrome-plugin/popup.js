@@ -137,7 +137,7 @@ const analyze = (currentTabUrl) => {
       getWholeTruth();
       getStockTip();
       // getBackTest();
-      getCredibility();
+      getCredibility(data.thesis.username);
     })
     .catch((error) => console.error("Error:", error));
 };
@@ -275,7 +275,9 @@ function getBackTest() {
     });
 }
 
-function getCredibility() {
+function getCredibility(name, stock) {
+  document.getElementById("credibility-youtuber-name").innerText = name;
+  document.getElementById("credibility-youtuber-name-2").innerText = name;
   document.getElementById("credibility-percent").innerText =
     Math.floor(Math.random() * 40) + 50;
   document.getElementById("credibility-youtubers").innerText =
