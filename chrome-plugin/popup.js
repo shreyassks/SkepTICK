@@ -136,8 +136,11 @@ const analyze = (currentTabUrl) => {
       updateTranscribeDOM(data);
       getWholeTruth();
       getStockTip();
-      // getBackTest();
-      getCredibility(data.thesis.username);
+
+      const keys = Object.keys(data);
+      const filteredKeys = keys.filter((key) => key !== "username");
+
+      getCredibility(data.thesis.username, filteredKeys);
     })
     .catch((error) => console.error("Error:", error));
 };
@@ -275,9 +278,10 @@ function getBackTest() {
     });
 }
 
-function getCredibility(name, stock) {
+function getCredibility(name, stocks) {
   document.getElementById("credibility-youtuber-name").innerText = name;
   document.getElementById("credibility-youtuber-name-2").innerText = name;
+  document.getElementById("credibility-youtuber-stock").innerText = stocks[0];
   document.getElementById("credibility-percent").innerText =
     Math.floor(Math.random() * 40) + 50;
   document.getElementById("credibility-youtubers").innerText =
