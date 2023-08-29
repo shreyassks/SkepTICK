@@ -400,7 +400,7 @@ function updateWholeTruthList(textList, containerId, current) {
     // li.textContent = text;
     li.innerHTML = `<p>${text[0]}</p><div class="wholetruth">${
       index <= current
-        ? "<span>❗❗</span> <p>" + text[1] + "</p>"
+        ? "<span>❗</span> <p>" + text[1] + "</p>"
         : "<p><i>Fetching 'wholetruth' behind claim ...</i></p>"
     }</div>`;
     ul.appendChild(li); // Append the list item to the unordered list
