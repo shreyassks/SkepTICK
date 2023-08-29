@@ -1,14 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,100;1,200&display=swap');
+
 body {
     text-align: center;
+    padding: 4em;
 }
 
 h1 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+img {
+    width: 20em;
+    margin: 1em auto;
 }
 
 h2 {
-    font-family: serif;
-    font-weight: lighter;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    margin-top: -1em;
 }
 
 form {
@@ -19,37 +29,49 @@ form {
 }
 
 label {
-    font-size: 1.4em;
-    font-family: serif;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
     display: block;
-    margin: 0.5em;
     margin-left: 0;
     margin-top: 1.5em;
+    padding-left: 0.5em;
 }
 
 
 input {
     padding: 0.5em;
     font-size: 1.2em;
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
     box-sizing: border-box;
     width: 100%;
-    text-align: center;
-    font-weight: lighter;
+    text-align: left;
     display: block;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.415);
+    outline: 0;
+    margin-bottom: 3em;
+}
+
+input:focus {
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid rgb(0, 0, 0);
 }
 
 #register-button {
-    width: 100%;
-    padding: 0.5em;
-    font-size: 1.3em;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 400;
-    color: white;
+    padding: 0.5em 2em;
+    font-size: 1.5em;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-shadow: white 1px 1px;
+    /* color: white; */
     border: none;
     background-color: #97d7cc ;
     cursor: pointer;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     box-shadow: rgb(194, 194, 194) 2px 2px;
     margin: 2em auto;
 }

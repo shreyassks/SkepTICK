@@ -56,7 +56,7 @@ def stock_tips():
     action_agent = ActionAgent(llm)
 
     prompt_template = PromptTemplate.from_template(
-        "Goal 1) Given the compnay name {company_name}, get news articles about the company using Company news tool"
+        "Goal 1) Given the company name {company_name}, get news articles about the company using Company news tool"
         "Goal 2) Get the ticker or trading symbol for {company_name}"
         "Goal 3) Once you have ticker symbol, get the stock history for the company using Stock history tool"
         "Goal 4) Use the same ticker symbol, to get stock analysis for the company using Stock analysis tool"

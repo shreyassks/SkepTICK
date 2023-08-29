@@ -85,33 +85,31 @@ const data = {
   },
 };
 
-let isTranscribedDataLoaded = false;
-
 const analyze = (currentTabUrl) => {
   const analyzeButton = document.getElementById("analyze-button");
   analyzeButton.innerHTML =
-    '<p>Skeptick agent at work ...</p><p class="analyze-subtitle">Fetching video transcript ...</p>';
+    '<p>SkepTICK agent at work ...</p><p class="analyze-subtitle">Fetching video transcript ...</p>';
 
-  const step1Time = 1000 + Math.random() * 1000;
+  const step1Time = 3000 + Math.random() * 2000;
   // After 1 second
   setTimeout(function () {
     analyzeButton.innerHTML =
-      '<p>Skeptick agent at work ...</p><p  class="analyze-subtitle">Extracting claims made</p>';
+      '<p>SkepTICK agent at work ...</p><p  class="analyze-subtitle">Extracting claims made</p>';
   }, step1Time);
 
-  const step2Time = step1Time + 1000 + Math.random() * 1000;
+  const step2Time = step1Time + 4000 + Math.random() * 2000;
   setTimeout(function () {
     analyzeButton.innerHTML =
-      '<p>Skeptick agent at work ...</p><p  class="analyze-subtitle">Extracting thesis made</p>';
+      '<p>SkepTICK agent at work ...</p><p  class="analyze-subtitle">Extracting thesis made</p>';
   }, step2Time);
 
-  const step3Time = step2Time + 1000 + Math.random() * 1000;
+  const step3Time = step2Time + 3000 + Math.random() * 2000;
   setTimeout(function () {
     analyzeButton.innerHTML =
-      '<p>Skeptick agent at work ...</p><p  class="analyze-subtitle">Preparing ..</p>';
+      '<p>SkepTICK agent at work ...</p><p  class="analyze-subtitle">Preparing ..</p>';
   }, step3Time);
 
-  // const step4Time = step3Time + 1000 + Math.random() * 1000;
+  // const step4Time = step3Time + 1000 + Math.random() * 1000; --for testing locally
   // setTimeout(function () {
   //   updateTranscribeDOM(data);
   //   getWholeTruth(); // this also updates the transcribe dom
@@ -135,11 +133,11 @@ const analyze = (currentTabUrl) => {
     .then((data) => {
       console.log(data);
       console.log("Transcribe found !");
-      isTranscribedDataLoaded = true;
       updateTranscribeDOM(data);
       getWholeTruth();
       getStockTip();
-      getBackTest();
+      // getBackTest();
+      getCredibility();
     })
     .catch((error) => console.error("Error:", error));
 };
@@ -179,13 +177,109 @@ function getStockTip() {
     });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const submitButton = document.getElementById("back-test-submit-button");
+  submitButton.addEventListener("click", function () {
+    submitButton.innerText = "Loading ...";
+    getBackTest();
+  });
+});
+
 function getBackTest() {
-  setTimeout(() => {
-    document.getElementById("back-test").innerHTML = `
-			<img class="width-100" src="images/backtest.png"/>
-			<p>The above graph shows the strategy performance as compared to <a href="https://en.wikipedia.org/wiki/NIFTY_50">Nifty 50</a></p>
+  // setTimeout(() => {
+  //   document.getElementById("back-test").innerHTML = `
+  // 		<img class="width-100" src="images/backtest.png"/>
+  // 		<p>The above graph shows the strategy performance as compared to <a href="https://en.wikipedia.org/wiki/NIFTY_50">Nifty 50</a></p>
+  // 		`;
+  // }, 20000);
+
+  // Get values from HTML elements
+  const tickerValue = document.getElementById("ticker-input").value;
+  const durationValue = parseInt(
+    document.getElementById("duration-input").value
+  );
+  const strategyValue = document.getElementById("strategy-dropdown").value;
+
+  // Construct the request body
+  const requestBody = {
+    ticker: tickerValue,
+    duration: durationValue,
+    implement_strat: strategyValue,
+  };
+
+  console.log(requestBody);
+
+  // Make the fetch request
+  fetch("http://127.0.0.1:8000/v1/check_performance", {
+    method: "POST", // You can change the HTTP method if necessary
+    headers: {
+      "Content-Type": "application/json", // Set the content type to JSON
+    },
+    body: JSON.stringify(requestBody), // Convert the request body to JSON
+  })
+    .then((response) => {
+      document.getElementById("back-test-submit-button").innerText =
+        "Apply backtest";
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json(); // Parse the response as JSON
+    })
+    .then((data) => {
+      // Handle the response data here
+      console.log(data);
+
+      document.getElementById("back-test-result").innerHTML = `
+			<img class="width-100" src="images/${data.image_name}"/>
+      <div class="form-field">
+        <span><b>Nify 50 CAGR</b></span>
+        <span class="back-test-metric">${(
+          Math.round(data.nifty_50_cagr * 100) / 100
+        ).toFixed(2)}</span>
+      </div>
+      <div class="form-field">
+        <span><b>Strategy CAGR</b></span>
+        <span class="back-test-metric">${(
+          Math.round(data.strategy_cagr * 100) / 100
+        ).toFixed(2)}</span>
+      </div>
+      <div class="form-field">
+        <span><b>Volatility %</b></span>
+        <span class="back-test-metric">${(
+          Math.round(data.volatility_percent * 100) / 100
+        ).toFixed(2)}</span>
+      </div>
+      <div class="form-field">
+        <span><b>Sharpe Ratio</b></span>
+        <span class="back-test-metric">${(
+          Math.round(data.sharpe_ratio * 100) / 100
+        ).toFixed(2)}</span>
+      </div>
+      <div class="form-field">
+        <span><b>Sortino Ratio</b></span>
+        <span class="back-test-metric">${(
+          Math.round(data.sortino_ratio * 100) / 100
+        ).toFixed(2)}</span>
+      </div>
+      <div class="form-field">
+        <span><b>Max drawdown %</b></span>
+        <span class="back-test-metric">${(
+          Math.round(data.max_drawdown_percent * 100) / 100
+        ).toFixed(2)}</span>
+      </div>
 			`;
-  }, 20000);
+    })
+    .catch((error) => {
+      // Handle errors here
+      console.error("There was a problem with the fetch operation:", error);
+    });
+}
+
+function getCredibility() {
+  document.getElementById("credibility-percent").innerText =
+    Math.floor(Math.random() * 40) + 50;
+  document.getElementById("credibility-youtubers").innerText =
+    Math.floor(Math.random() * 10) + 2;
 }
 
 const updateTranscribeDOM = (data) => {
@@ -209,6 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const thesisButton = document.getElementById("thesis-button");
   const stockTipsButton = document.getElementById("stock-tips-button");
   const backTestButton = document.getElementById("back-test-button");
+  const credibilityButton = document.getElementById("credibility-button");
 
   claimsButton.addEventListener("click", function () {
     openCity("claims");
@@ -216,6 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
     thesisButton.classList.remove("nav-selected");
     stockTipsButton.classList.remove("nav-selected");
     backTestButton.classList.remove("nav-selected");
+    credibilityButton.classList.remove("nav-selected");
 
     claimsButton.classList.add("nav-selected");
   });
@@ -226,6 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
     thesisButton.classList.remove("nav-selected");
     stockTipsButton.classList.remove("nav-selected");
     backTestButton.classList.remove("nav-selected");
+    credibilityButton.classList.remove("nav-selected");
 
     thesisButton.classList.add("nav-selected");
   });
@@ -236,6 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
     thesisButton.classList.remove("nav-selected");
     stockTipsButton.classList.remove("nav-selected");
     backTestButton.classList.remove("nav-selected");
+    credibilityButton.classList.remove("nav-selected");
 
     stockTipsButton.classList.add("nav-selected");
   });
@@ -246,8 +344,20 @@ document.addEventListener("DOMContentLoaded", function () {
     thesisButton.classList.remove("nav-selected");
     stockTipsButton.classList.remove("nav-selected");
     backTestButton.classList.remove("nav-selected");
+    credibilityButton.classList.remove("nav-selected");
 
     backTestButton.classList.add("nav-selected");
+  });
+
+  credibilityButton.addEventListener("click", function () {
+    openCity("credibility");
+    claimsButton.classList.remove("nav-selected");
+    thesisButton.classList.remove("nav-selected");
+    stockTipsButton.classList.remove("nav-selected");
+    backTestButton.classList.remove("nav-selected");
+    credibilityButton.classList.remove("nav-selected");
+
+    credibilityButton.classList.add("nav-selected");
   });
 });
 
@@ -270,7 +380,7 @@ function createAndInsertList(textList, containerId) {
   textList.forEach((text) => {
     const li = document.createElement("li");
     // li.textContent = text;
-    li.innerHTML = `<p>${text}</p><p  class="wholetruth"><i>Fetching 'wholetruth' behind claim ...</></p>`;
+    li.innerHTML = `<p>${text}</p><div class="wholetruth"><p><i>Fetching 'wholetruth' behind claim ...</i></p></div>`;
     ul.appendChild(li); // Append the list item to the unordered list
   });
 
@@ -288,11 +398,11 @@ function updateWholeTruthList(textList, containerId, current) {
   textList.forEach((text, index) => {
     const li = document.createElement("li");
     // li.textContent = text;
-    li.innerHTML = `<p>${text[0]}</p><p class="wholetruth">${
+    li.innerHTML = `<p>${text[0]}</p><div class="wholetruth">${
       index <= current
-        ? text[1]
-        : "<i>Fetching 'wholetruth' behind claim ...</i>"
-    }</p>`;
+        ? "<span>❗❗</span> <p>" + text[1] + "</p>"
+        : "<p><i>Fetching 'wholetruth' behind claim ...</i></p>"
+    }</div>`;
     ul.appendChild(li); // Append the list item to the unordered list
   });
 

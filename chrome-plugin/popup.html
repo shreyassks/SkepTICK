@@ -2,11 +2,12 @@
 <html>
   <head>
     <link rel="stylesheet" href="popup.css" />
+    <meta charset="UTF-8" />
   </head>
   <body>
     <div id="not-registered">
       <img src="./skepticklogo.png" />
-      <h1>Welcome to Skeptick</h1>
+      <h1>Welcome to SkepTICK</h1>
       <h3>
         You are not registered, please register to get customized experience
       </h3>
@@ -20,7 +21,10 @@
         </div>
         <div id="transcribed" style="display: none">
           <div class="nav-bar">
-            <button class="nav-button nav-selected" id="thesis-button">
+            <button class="nav-button nav-selected" id="credibility-button">
+              Youtuber Credibility
+            </button>
+            <button class="nav-button" id="thesis-button">
               Thesis Suggested
             </button>
             <button class="nav-button" id="claims-button">Stock claims</button>
@@ -32,26 +36,79 @@
             </button>
           </div>
 
+          <div id="credibility" class="tab">
+            <p>
+              ⚠️ Matches <b><span id="credibility-percent"></span>%</b> with our
+              algorithm
+            </p>
+            <p>
+              ✅ Same claim by
+              <b><span id="credibility-youtubers"></span></b> other youtubers
+            </p>
+          </div>
           <div id="claims" class="tab" style="display: none">
             <div id="claims-list"></div>
           </div>
-          <div id="thesis" class="tab">
+          <div id="thesis" class="tab" style="display: none">
             <div id="thesis-list"></div>
           </div>
           <div id="stock-tips" class="tab" style="display: none">
             Extracting past stock data to validate claims ...
           </div>
           <div id="back-test" class="tab" style="display: none">
-            Back-testing claims made with the historical data ...
+            <h3>
+              Apply the strategy claimed on the historic stock data of your
+              choice
+            </h3>
+            <div class="form-field">
+              <label for="strategy-dropdown">Extracted thesis </label>
+              <select name="strategy-dropdown" id="strategy-dropdown">
+                <option value="SMAcross">SMAcross</option>
+                <option value="RSI_Strategy">RSI_Strategy</option>
+                <option value="BreakoutStrategy">BreakoutStrategy</option>
+                <option value="BollingerBandsStrategy">
+                  BollingerBandsStrategy
+                </option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label>Duration</label>
+              <span
+                ><input type="number" min="0" max="100" id="duration-input" />
+                y</span
+              >
+            </div>
+
+            <div class="form-field">
+              <label for="ticker-dropdown"
+                >Select company to backtest it on</label
+              >
+              <datalist id="suggestions">
+                <option>RELIANCE.NS</option>
+                <option>GUJTHEM.BO</option>
+              </datalist>
+              <input
+                autocomplete="on"
+                list="suggestions"
+                placeholder="Enter ticker symbol"
+                id="ticker-input"
+              />
+            </div>
+
+            <button id="back-test-submit-button">Apply backtest</button>
+
+            <div id="back-test-result"></div>
           </div>
           <br />
           <br />
-          <img src="./skepticklogo.png" />
+          <img id="transcribed-logo" src="./skepticklogo.png" />
         </div>
       </div>
+
       <div id="not-youtube-watch">
         <img src="./skepticklogo.png" />
-        <p>Be vigilant of investment advices</p>
+        <p><b>Be vigilant of investment advices</b></p>
         <p id="visit-p">Visit a youtube video to analyze it</p>
       </div>
     </div>

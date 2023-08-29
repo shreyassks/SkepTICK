@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@t@0,300;0,400;0,500;0,600;1,100;1,200&display=swap');
+
+
 body {
     width: 40em;
     height: 40em;
@@ -6,32 +9,60 @@ body {
 }
 
 #register-button {
-    width: 20%;
-    padding: 0.5em;
+    padding: 0.5em 2em;
     font-size: 1.3em;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 400;
-    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-shadow: white 1px 1px;
+    /* color: white; */
     border: none;
-    background-color: #97d7cc ;
+    background-color: #97d7cc9f ;
     cursor: pointer;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     box-shadow: rgb(194, 194, 194) 2px 2px;
     margin: 2em auto;
 }
 
 #not-registered {
     text-align: center;
+    margin: 3em;
+}
+
+#not-registered img {
+    width: 50%;
+    margin: 3em auto;
 }
 
 #not-registered h1 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: auto;
+}
+
+#not-registered h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    margin: 2em;
+}
+
+#registered {
+    height: 100%;
+}
+
+#youtube-watch {
+    height: 100%;
+    overflow: hidden;
 }
 
 #not-youtube-watch {
     text-align: center;
     font-size: 1.5em;
+    padding: 5em;
+    font-family: 'Poppins', sans-serif;
+}
+
+#not-youtube-watch img {
+    width: 50%;
+    margin: 2em auto;
 }
 
 #visit-p {
@@ -39,30 +70,50 @@ body {
 }
 
 #analyze-button {
-    display: block;
-    width: 50%;
-    padding: 1em;
+    padding: 1em 2em;
     font-size: 1.3em;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 400;
-    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-shadow: white 1px 1px;
+    /* color: white; */
     border: none;
-    background-color: #97d7cc ;
+    background-color: #97d7cc9f ;
     cursor: pointer;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     box-shadow: rgb(194, 194, 194) 2px 2px;
-    margin: 3em auto;
+    margin: 2em auto;
 
 }
 
 #not-transcribed {
     text-align: center;
+    padding: 5em;
+    height: 100%;
+}
+
+#not-transcribed img {
+    width: 50%;
+    margin: 2em auto;
 }
 
 .analyze-subtitle {
     font-size: 0.8em;
+    font-weight: 300;
     letter-spacing: 1px;
     font-style: italic;
+}
+
+#transcribed {
+    overflow: auto;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    padding-bottom: 25em;
+}
+
+#transcribed-logo {
+    width: 25%;
+    position: absolute;
+    bottom: 0;
 }
 
 .nav-bar {
@@ -88,10 +139,92 @@ body {
 }
 
 .wholetruth {
-    background-color: #97d7cc;
+    background-color: #97d7cc6b;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 2em;
+    padding-left: 1em;
+}
+
+.wholetruth p {
+    text-align: justify;
+}
+
+.wholetruth span {
+    margin-right: 1em;
 }
 
 .width-100 {
     width: 100%;
 }
 
+
+#credibility {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+#credibility p {
+    margin: 2em auto;
+}
+
+#thesis {
+    font-family: 'Poppins', sans-serif;
+}
+
+#thesis li {
+    margin-bottom: 3em;
+}
+
+#claims li {
+    margin-bottom: 2em;
+}
+
+
+.form-field {
+    margin-top: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+/* #thesis ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
+  #thesis li {
+    padding-left: 1em;
+    padding: 2em;
+    margin-bottom: 2em;
+  }
+  
+  #thesis li:before {
+    content: "➡️";
+  } */
+
+  
+#back-test-submit-button {
+    padding: 0.5em 2em;
+    font-size: 1.1em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-shadow: white 1px 1px;
+    /* color: white; */
+    border: none;
+    background-color: #97d7cc9f ;
+    cursor: pointer;
+    letter-spacing: 1px;
+    box-shadow: rgb(194, 194, 194) 2px 2px;
+    margin: 2em auto;
+}
+
+
+pre {
+    white-space: pre-wrap;
+  }
+  
