@@ -1,0 +1,58 @@
+ticker,recommendation,target_achieve_duration,Author,Publish Date,Correctness
+gtbl,buy,3 years,Rahul Jain,30/07/23,1
+sbin,buy,3 years,Rahul Jain,18/06/23,1
+itc,buy,3 years,Rahul Jain,18/06/23,0
+tcs,buy,3 years,Rahul Jain,18/06/23,0
+TCS,buy,3 years,Rahul Jain,09/08/23,1
+ITC,buy,3 years,Rahul Jain,09/08/23,1
+HCL,buy,3 years,Rahul Jain,09/08/23,0
+Sun pharmaceutical,buy,3 years,Rahul Jain,09/08/23,0
+cipla,buy,3 years,Rahul Jain,09/08/23,1
+Dr Reddy's laboratory,buy,3 years,Rahul Jain,09/08/23,1
+Bharat Electronics limited,buy,3 years,Rahul Jain,09/08/23,0
+HDFC,buy,3 years,Akshat Shrivastava,05/07/23,0
+AAPL,buy,3 years,Akshat Shrivastava,05/07/23,1
+kpit,buy,5-10 years,Sahil Bhadviya,28/07/23,1
+flindia,buy,5-10 years,Sahil Bhadviya,28/07/23,1
+mapmyindia,buy,few years,Sahil Bhadviya,28/07/23,1
+dixon,buy,long term,Sahil Bhadviya,28/07/23,0
+mtar,buy,next few years,Sahil Bhadviya,28/07/23,0
+idfcfirst,buy,3-5 years,Sahil Bhadviya,28/07/23,1
+gokuld,buy,coming quarters and years,Sahil Bhadviya,28/07/23,1
+avas,buy,3-5 years,Sahil Bhadviya,28/07/23,1
+praj,buy,3-5 years,Sahil Bhadviya,28/07/23,0
+newgen,buy,3 years,Sahil Bhadviya,28/07/23,0
+garware,buy,3 years,Sahil Bhadviya,03/06/23,0
+gmm,buy,3 years,Sahil Bhadviya,03/06/23,1
+suprajit,buy,3 years,Sahil Bhadviya,03/06/23,1
+moldtek,buy,3 years,Sahil Bhadviya,03/06/23,1
+amrutanjan,buy,3 years,Sahil Bhadviya,03/06/23,0
+galaxy,buy,3 years,Sahil Bhadviya,03/06/23,1
+fineorganics,buy,3 years,Sahil Bhadviya,03/06/23,0
+alkylamine,buy,3 years,Sahil Bhadviya,03/06/23,1
+paushak,buy,3 years,Sahil Bhadviya,03/06/23,0
+masfinancial,buy,3 years,Sahil Bhadviya,03/06/23,0
+avasfinancial,buy,3 years,Sahil Bhadviya,03/06/23,0
+tarsons,buy,3 years,Sahil Bhadviya,03/06/23,1
+vijayadiagnostic,buy,3 years,Sahil Bhadviya,03/06/23,1
+homefirst,buy,3 years,Sahil Bhadviya,03/06/23,1
+prudent,buy,3 years,Sahil Bhadviya,03/06/23,1
+ultramarine,buy,3 years,Sahil Bhadviya,03/06/23,0
+vmart,buy,3 years,Sahil Bhadviya,03/06/23,0
+HDFC,buy,3 years,Akshat Shrivastava,02/08/23,1
+ICICI,buy,3 years,Akshat Shrivastava,02/08/23,1
+Kotak Mahindra,buy,3 years,Akshat Shrivastava,02/08/23,0
+Avas Financials,buy,3 years,Akshat Shrivastava,02/08/23,0
+SBI Cards,buy,3 years,Akshat Shrivastava,02/08/23,0
+Rajesh Exports,buy,3 years,Akshat Shrivastava,02/08/23,1
+UI Path,buy,3 years,Akshat Shrivastava,02/08/23,1
+G1 Small Finance,buy,3 years,Akshat Shrivastava,02/08/23,0
+dick jam,buy,3 years,Akshat Shrivastava,27/04/22,0
+adhinath textiles,buy,3 years,Akshat Shrivastava,27/04/22,1
+pridecom group,buy,3 years,Akshat Shrivastava,27/04/22,1
+cerebral integrated,buy,3 years,Akshat Shrivastava,27/04/22,1
+ngl fine chemical,buy,3 years,Akshat Shrivastava,27/04/22,1
+juti resins,buy,3 years,Akshat Shrivastava,27/04/22,0
+reliance,sell,not mentioned,Akshat Shrivastava,04/08/23,0
+relaxo,sell,not mentioned,Akshat Shrivastava,04/08/23,1
+bata,sell,not mentioned,Akshat Shrivastava,04/08/23,0

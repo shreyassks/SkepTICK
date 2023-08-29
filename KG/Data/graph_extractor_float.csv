@@ -1,0 +1,58 @@
+ticker,recommendation,target_duration_years,YouTuber,Publish Date,Accuracy
+gtbl,buy,3,Rahul Jain,30/07/23,0.64
+sbin,buy,3,Rahul Jain,18/06/23,0.58
+itc,buy,3,Rahul Jain,18/06/23,0.21
+tcs,buy,3,Rahul Jain,18/06/23,0.12
+TCS,buy,3,Rahul Jain,09/08/23,0.45
+ITC,buy,3,Rahul Jain,09/08/23,0.86
+HCL,buy,3,Rahul Jain,09/08/23,0.97
+Sun pharmaceutical,buy,3,Rahul Jain,09/08/23,0.54
+cipla,buy,3,Rahul Jain,09/08/23,0.18
+Dr Reddys laboratory,buy,3,Rahul Jain,09/08/23,0.60
+Bharat Electronics limited,buy,3,Rahul Jain,09/08/23,0.97
+HDFC,buy,3,Akshat Shrivastava,05/07/23,0.39
+AAPL,buy,3,Akshat Shrivastava,05/07/23,0.73
+kpit,buy,7.5,Sahil Bhadviya,28/07/23,0.06
+flindia,buy,7.5,Sahil Bhadviya,28/07/23,0.92
+mapmyindia,buy,3,Sahil Bhadviya,28/07/23,0.14
+dixon,buy,10,Sahil Bhadviya,28/07/23,0.18
+mtar,buy,3,Sahil Bhadviya,28/07/23,0.37
+idfcfirst,buy,4,Sahil Bhadviya,28/07/23,0.56
+gokuld,buy,2,Sahil Bhadviya,28/07/23,0.39
+avas,buy,4,Sahil Bhadviya,28/07/23,0.86
+praj,buy,4,Sahil Bhadviya,28/07/23,0.50
+newgen,buy,3,Sahil Bhadviya,28/07/23,0.56
+garware,buy,3,Sahil Bhadviya,03/06/23,0.40
+gmm,buy,3,Sahil Bhadviya,03/06/23,0.74
+suprajit,buy,3,Sahil Bhadviya,03/06/23,0.44
+moldtek,buy,3,Sahil Bhadviya,03/06/23,0.13
+amrutanjan,buy,3,Sahil Bhadviya,03/06/23,0.14
+galaxy,buy,3,Sahil Bhadviya,03/06/23,0.27
+fineorganics,buy,3,Sahil Bhadviya,03/06/23,0.16
+alkylamine,buy,3,Sahil Bhadviya,03/06/23,0.53
+paushak,buy,3,Sahil Bhadviya,03/06/23,0.87
+masfinancial,buy,3,Sahil Bhadviya,03/06/23,0.31
+avasfinancial,buy,3,Sahil Bhadviya,03/06/23,0.22
+tarsons,buy,3,Sahil Bhadviya,03/06/23,0.18
+vijayadiagnostic,buy,3,Sahil Bhadviya,03/06/23,0.61
+homefirst,buy,3,Sahil Bhadviya,03/06/23,0.46
+prudent,buy,3,Sahil Bhadviya,03/06/23,0.64
+ultramarine,buy,3,Sahil Bhadviya,03/06/23,0.89
+vmart,buy,3,Sahil Bhadviya,03/06/23,0.41
+HDFC,buy,3,Akshat Shrivastava,02/08/23,0.61
+ICICI,buy,3,Akshat Shrivastava,02/08/23,0.64
+Kotak Mahindra,buy,3,Akshat Shrivastava,02/08/23,0.60
+Avas Financials,buy,3,Akshat Shrivastava,02/08/23,0.01
+SBI Cards,buy,3,Akshat Shrivastava,02/08/23,0.23
+Rajesh Exports,buy,3,Akshat Shrivastava,02/08/23,0.34
+UI Path,buy,3,Akshat Shrivastava,02/08/23,0.12
+G1 Small Finance,buy,3,Akshat Shrivastava,02/08/23,0.15
+dick jam,buy,3,Akshat Shrivastava,27/04/22,0.88
+adhinath textiles,buy,3,Akshat Shrivastava,27/04/22,0.20
+pridecom group,buy,3,Akshat Shrivastava,27/04/22,0.29
+cerebral integrated,buy,3,Akshat Shrivastava,27/04/22,0.76
+ngl fine chemical,buy,3,Akshat Shrivastava,27/04/22,0.06
+juti resins,buy,3,Akshat Shrivastava,27/04/22,0.39
+reliance,sell,0,Akshat Shrivastava,04/08/23,0.11
+relaxo,sell,0,Akshat Shrivastava,04/08/23,0.85
+bata,sell,0,Akshat Shrivastava,04/08/23,0.45
