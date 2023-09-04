@@ -39,10 +39,11 @@ def create_graph(history, company_name):
     plt.xlabel("Date")
     plt.ylabel("Stock Price")
 
-    directory = os.path.join(Path(__file__).parent.parent.parent.parent.parent, "chrome-plugin/images")
+    directory = os.path.join(
+        Path(__file__).parent.parent.parent.parent.parent, "chrome-plugin/images")
     image_name = directory + "/image1.png"
     plt.savefig(image_name)
-    return image_name
+    return "image1.png"
 
 
 @router.get("/stock_facts")
@@ -50,9 +51,10 @@ def stock_tips():
     company_name = "Gujarat Themis Biosyn Ltd"  # fetch_db("Rahul Jain")
     # role of agent is to get investment thesis based on factual data from news source, stock history, balance sheets
 
-    llm = OpenAI(temperature=0, streaming=True, callbacks=[FinalStreamingStdOutCallbackHandler()], verbose=True)
+    llm = OpenAI(temperature=0, streaming=True, callbacks=[
+                 FinalStreamingStdOutCallbackHandler()], verbose=True)
     action_agent = ActionAgent(llm)
-    
+
     prompt_template = PromptTemplate.from_template(
         "Goal 1) Given the company name {company_name}, get news articles about the company using Company news tool"
         "Goal 2) Get the ticker or trading symbol for {company_name}"
@@ -61,8 +63,8 @@ def stock_tips():
     )
 
     prompt = prompt_template.format(company_name=company_name)
-    
-    investment_thesis=action_agent.run(prompt)
+
+    investment_thesis = action_agent.run(prompt)
     print("OUTPUT FROM AGENT", investment_thesis)
 
     history = financial_advisor(company_name)
