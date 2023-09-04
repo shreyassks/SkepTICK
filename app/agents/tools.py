@@ -4,7 +4,7 @@ from langchain.agents import load_tools
 from langchain.agents.tools import Tool
 from langchain.utilities import PythonREPL
 from pydantic import BaseModel, Field
-from langchain import LLMMathChain,SerpAPIWrapper
+from langchain import LLMMathChain, SerpAPIWrapper
 from langchain.tools import ShellTool
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import (
@@ -13,8 +13,8 @@ from langchain.schema import (
 )
 import json
 import requests
-from langchain.chains import LLMChain 
-from  langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
 from typing import List
 import streamlit as st
 import yfinance as yf
@@ -30,9 +30,11 @@ from langchain.chat_models import ChatOpenAI
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+
 # Defining schema for llm math chain as an example
 class CalculatorInput(BaseModel):
     question: str = Field()
+
 
 # class FhirObservationInput(BaseModel):
 #     input_data: List[str] = Field(description="should be a list, with hypothesis data and pateint ID")
@@ -40,25 +42,25 @@ class CalculatorInput(BaseModel):
 class FhirObservationInput(BaseModel):
     input_data: str = Field(description="hypothesis data")
 
+
 class CreatePatientSummaryInput(BaseModel):
     pass
 
 
-
 class Tools():
 
-    def __init__(self,llm) :
+    def __init__(self, llm):
         self.llm = llm
 
         self.tools = [
             Tool(
-            name="Terminal",
-            description="A terminal. Use this to execute shell commands on this MacOS machine. Input should be a valid shell command. For example, `ls`.",
-            func=self.shell_tool()
+                name="Terminal",
+                description="A terminal. Use this to execute shell commands on this MacOS machine. Input should be a valid shell command. For example, `ls`.",
+                func=self.shell_tool()
             ),
             Tool(
-               name="python_repl",
-               description="A Python shell. Use this to execute python commands. Input should be a valid python command. If you want to see the output of a value, you should print it out with `print(...)`.",
+                name="python_repl",
+                description="A Python shell. Use this to execute python commands. Input should be a valid python command. If you want to see the output of a value, you should print it out with `print(...)`.",
                 func=self.python_repl()
             ),
             Tool(
@@ -76,7 +78,6 @@ class Tools():
                 name="Get Stock history",
                 func=self.get_stock_data,
                 description="Get historical market data for a company stock given ticker symbol, example input `AAPL`",
-                
 
             ),
             Tool(
@@ -91,13 +92,13 @@ class Tools():
 
     def shell_tool(self):
         shell_tool = ShellTool()
-        
-        #have to retun constructor
+
+        # have to retun constructor
         return shell_tool.run
 
     def python_repl(self):
         python_repl = PythonREPL()
-        
+
         return python_repl.run
 
     def search_tool(self):
@@ -105,7 +106,7 @@ class Tools():
         search = SerpAPIWrapper()
         return search.run
 
-    def get_company_news(self,company_name):
+    def get_company_news(self, company_name):
         """Use this functon ONLY to get company news. Input should be the company name. For example, `Apple`."""
         params = {
             "engine": "google",
@@ -117,18 +118,16 @@ class Tools():
         response = requests.get('https://serpapi.com/search', params=params)
         data = response.json()
 
-        filename="app/assets/investment.txt"
+        filename = "app/assets/investment.txt"
         news = data.get('news_results')
 
         if news:
             self.write_news_to_file(news, filename)
-        
+
         else:
             print("No news found.")
 
-
-
-    def write_news_to_file(self,news, filename):
+    def write_news_to_file(self, news, filename):
         with open(filename, 'w') as file:
             for news_item in news:
                 if news_item is not None:
@@ -139,8 +138,7 @@ class Tools():
                     file.write(f"Link: {link}\n")
                     file.write(f"Date: {date}\n\n")
 
-
-    def get_stock_evolution(self,company_name, period="1y"):
+    def get_stock_evolution(self, company_name, period="1y"):
         # Get the stock information
         company_name = "GUJTHEM.BO"
         stock = yf.Ticker(company_name)
@@ -159,8 +157,7 @@ class Tools():
 
         return hist
 
-
-    def get_financial_statements(self,ticker):
+    def get_financial_statements(self, ticker):
         # Create a Ticker object
         ticker = "GUJTHEM.BO"
         company = Ticker(ticker)
@@ -182,43 +179,39 @@ class Tools():
             file.write("\nValuation Measures\n")
             file.write(valuation_measures)
 
-
     def get_stock_data(self, company_ticker):
         hist = self.get_stock_evolution(company_ticker)
         self.get_financial_statements(company_ticker)
         return hist
 
-    def get_stock_analysis(self,company_ticker):
+    def get_stock_analysis(self, company_ticker):
         with open("app/assets/investment.txt", "r") as file:
             content = file.read()[:14000]
         chat = ChatOpenAI(temperature=0, model_name='gpt-4', request_timeout=120)
 
         template = ChatPromptTemplate.from_messages(
-        [
-            SystemMessage(
-                content=(
-                    """Write a detailed investment thesis to answer
-                    the user request. Provide numbers to justify
-                    your assertions, a lot ideally. Always provide
-                    a recommendation to buy the stock of the company
-                    or not given the information available. 
-                    Never mention something like this:
-                    However, it is essential to consider your own risk
-                    tolerance, financial goals, and time horizon before
-                    making any investment decisions. It is recommended
-                    to consult with a financial advisor or do further
-                    research to gain more insights into the company's 
-                    fundamentals and market trends. The user already knows that"""
-                )
-            ),
-            HumanMessagePromptTemplate.from_template("This is ticker symbol {ticker},this is news {news}"),
+            [
+                SystemMessage(
+                    content=(
+                        """Write a detailed investment thesis based on facts for the given stock.
+                        Keep it short, precise and point wise. Strictly don't make any recommendations or predictions.
+                        Mention the Website URLs you've referred while writing the thesis.
+                        Never mention something like this:
+                        However, it is essential to consider your own risk
+                        tolerance, financial goals, and time horizon before
+                        making any investment decisions. It is recommended
+                        to consult with a financial advisor or do further
+                        research to gain more insights into the company's 
+                        fundamentals and market trends. The user already knows that"""
+                    )
+                ),
+                HumanMessagePromptTemplate.from_template("This is ticker symbol {ticker},this is news {news}"),
             ]
         )
 
         response = chat(template.format_messages(ticker=company_ticker, news=content))
 
         return response.content
-    
+
     def list_tools(self):
         return self.tools
-    

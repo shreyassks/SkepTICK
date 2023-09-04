@@ -45,7 +45,7 @@ def create_graph(history, company_name):
     return image_name
 
 
-@router.get("/stock_tips")
+@router.get("/stock_facts")
 def stock_tips():
     company_name = "Gujarat Themis Biosyn Ltd"  # fetch_db("Rahul Jain")
     # role of agent is to get investment thesis based on factual data from news source, stock history, balance sheets
