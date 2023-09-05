@@ -165,7 +165,7 @@ function getWholeTruth() {
 }
 
 function getStockTip() {
-  fetch("http://127.0.0.1:8000/v1/stock_tips")
+  fetch("http://127.0.0.1:8000/v1/stock_facts")
     .then((response) => {
       if (response.status === 200) {
         return response.json();
@@ -272,6 +272,9 @@ function getBackTest() {
           Math.round(data.max_drawdown_percent * 100) / 100
         ).toFixed(2)}</span>
       </div>
+      <br />
+      <h5><i>Note: These results are based on historical stock price data and do not gaurantee future performance. This module is for informational and educational purposes only and should not be considered as financial advice.</i></h5>
+      <br />
 			`;
     })
     .catch((error) => {
@@ -282,8 +285,8 @@ function getBackTest() {
 
 function getCredibility(name, stocks) {
   document.getElementById("credibility-youtuber-name").innerText = name;
-  document.getElementById("credibility-youtuber-name-2").innerText = name;
-  document.getElementById("credibility-youtuber-stock").innerText = stocks[0];
+  // document.getElementById("credibility-youtuber-name-2").innerText = name;
+  // document.getElementById("credibility-youtuber-stock").innerText = stocks[0];
   document.getElementById("credibility-percent").innerText =
     Math.floor(Math.random() * 40) + 50;
   document.getElementById("credibility-youtubers").innerText =
