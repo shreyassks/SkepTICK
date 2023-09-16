@@ -109,42 +109,42 @@ const analyze = (currentTabUrl) => {
       '<p>SkepTICK agent at work ...</p><p  class="analyze-subtitle">Preparing ..</p>';
   }, step3Time);
 
-  // const step4Time = step3Time + 1000 + Math.random() * 1000;
-  // setTimeout(function () {
-  //   updateTranscribeDOM(data);
-  //   const keys = Object.keys(data.claims);
-  //   const filteredKeys = keys.filter((key) => key !== "username");
+  const step4Time = step3Time + 1000 + Math.random() * 1000;
+  setTimeout(function () {
+    updateTranscribeDOM(data);
+    const keys = Object.keys(data.claims);
+    const filteredKeys = keys.filter((key) => key !== "username");
 
-  //   getCredibility(data.thesis.username, filteredKeys);
-  // }, 0);
+    getCredibility(data.thesis.username, filteredKeys);
+  }, 0);
 
-  fetch("http://127.0.0.1:8000/v1/transcribe/breakdown", {
-    method: "POST",
-    body: JSON.stringify({ video_url: currentTabUrl }),
-    headers: {
-      "Content-type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        throw new Error("Request failed with status " + response.status);
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      console.log("Transcribe found !");
-      updateTranscribeDOM(data);
-      getWholeTruth();
-      getStockTip();
+  // fetch("http://127.0.0.1:8000/v1/transcribe/breakdown", {
+  //   method: "POST",
+  //   body: JSON.stringify({ video_url: currentTabUrl }),
+  //   headers: {
+  //     "Content-type": "application/json",
+  //   },
+  // })
+  //   .then((response) => {
+  //     if (response.status === 200) {
+  //       return response.json();
+  //     } else {
+  //       throw new Error("Request failed with status " + response.status);
+  //     }
+  //   })
+  //   .then((data) => {
+  //     console.log(data);
+  //     console.log("Transcribe found !");
+  //     updateTranscribeDOM(data);
+  //     getWholeTruth();
+  //     getStockTip();
 
-      const keys = Object.keys(data.claims);
-      const filteredKeys = keys.filter((key) => key !== "username");
+  //     const keys = Object.keys(data.claims);
+  //     const filteredKeys = keys.filter((key) => key !== "username");
 
-      getCredibility(data.thesis.username, filteredKeys);
-    })
-    .catch((error) => console.error("Error:", error));
+  //     getCredibility(data.thesis.username, filteredKeys);
+  //   })
+  //   .catch((error) => console.error("Error:", error));
 };
 
 function getWholeTruth() {
@@ -287,8 +287,8 @@ function getCredibility(name, stocks) {
   document.getElementById("credibility-youtuber-name").innerText = name;
   // document.getElementById("credibility-youtuber-name-2").innerText = name;
   // document.getElementById("credibility-youtuber-stock").innerText = stocks[0];
-  document.getElementById("credibility-percent").innerText =
-    Math.floor(Math.random() * 40) + 50;
+  // document.getElementById("credibility-percent").innerText =
+  //   Math.floor(Math.random() * 40) + 50;
   document.getElementById("credibility-youtubers").innerText =
     Math.floor(Math.random() * 10) + 2;
 }

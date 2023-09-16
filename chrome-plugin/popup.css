@@ -227,4 +227,16 @@ body {
 pre {
     white-space: pre-wrap;
   }
+
+.warning-box {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 1em;
+    border-radius: 5px;
+    margin: 1em;
+}
+
+.hide {
+    display: none;
+}
   
