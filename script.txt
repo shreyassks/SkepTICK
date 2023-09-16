@@ -1,0 +1,30 @@
+Good afternoon,
+My name is shreeyash. AI Research Engineer at Philips.
+Our team works at JusPay, CRISIL, KHOROS.
+
+The problem statement we worked on was Identifying misleading claims. 
+
+== Relatability in problem statement
+You are scrolling your youtube feed, and come acoross a video promising
+low risk, high growth, small caps stock.
+
+Ofcourse you click on it, but this time you have our plugin SkepTICK to help you.
+
+Why Youtube Plugin? Cheapest, Fastest and easiest way to reach scale on day 1 itself
+
+What SkepTICK does:
+=== Credibility module
+
+Imagine how facebook suggests you friends, or how linkedin shows you possible connections? There is some underlying graph structure that they use.
+We used similar technology - called as knowledge graph, and simply changed yourself to youtber, your friends to Stocks, and relation between them as credibility.
+
+We extracted and trained such model to give us credibility score of youtuber per stock.
+
+In this example, 75% is credibility of Rahul for stock GTBL
+
+== backtest module
+
+Now, they people also give lot of technical "gyan".
+
+
+
