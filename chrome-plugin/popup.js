@@ -90,61 +90,62 @@ const analyze = (currentTabUrl) => {
   analyzeButton.innerHTML =
     '<p>SkepTICK agent at work ...</p><p class="analyze-subtitle">Fetching video transcript ...</p>';
 
-  const step1Time = 3000 + Math.random() * 2000;
+  const step1Time = 4000 + Math.random() * 2000;
   // After 1 second
   setTimeout(function () {
     analyzeButton.innerHTML =
       '<p>SkepTICK agent at work ...</p><p  class="analyze-subtitle">Extracting claims made</p>';
   }, step1Time);
 
-  const step2Time = step1Time + 4000 + Math.random() * 2000;
+  const step2Time = step1Time + 5000 + Math.random() * 2000;
   setTimeout(function () {
     analyzeButton.innerHTML =
       '<p>SkepTICK agent at work ...</p><p  class="analyze-subtitle">Extracting thesis made</p>';
   }, step2Time);
 
-  const step3Time = step2Time + 3000 + Math.random() * 2000;
+  const step3Time = step2Time + 4000 + Math.random() * 2000;
   setTimeout(function () {
     analyzeButton.innerHTML =
       '<p>SkepTICK agent at work ...</p><p  class="analyze-subtitle">Preparing ..</p>';
   }, step3Time);
 
-  const step4Time = step3Time + 1000 + Math.random() * 1000;
-  setTimeout(function () {
-    updateTranscribeDOM(data);
-    const keys = Object.keys(data.claims);
-    const filteredKeys = keys.filter((key) => key !== "username");
+  // const step4Time = step3Time + 1000 + Math.random() * 1000;
+  // setTimeout(function () {
+  //   updateTranscribeDOM(data);
+  //   const keys = Object.keys(data.claims);
+  //   const filteredKeys = keys.filter((key) => key !== "username");
+  //   getCredibility(data.thesis.username, filteredKeys);
+  //   getSuggestiveTone();
+  // }, 0);
 
-    getCredibility(data.thesis.username, filteredKeys);
-  }, 0);
+  fetch("http://127.0.0.1:8000/v1/transcribe/breakdown", {
+    method: "POST",
+    body: JSON.stringify({ video_url: currentTabUrl }),
+    headers: {
+      "Content-type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error("Request failed with status " + response.status);
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      console.log("Transcribe found !");
+      updateTranscribeDOM(data);
+      getWholeTruth();
+      getStockTip();
 
-  // fetch("http://127.0.0.1:8000/v1/transcribe/breakdown", {
-  //   method: "POST",
-  //   body: JSON.stringify({ video_url: currentTabUrl }),
-  //   headers: {
-  //     "Content-type": "application/json",
-  //   },
-  // })
-  //   .then((response) => {
-  //     if (response.status === 200) {
-  //       return response.json();
-  //     } else {
-  //       throw new Error("Request failed with status " + response.status);
-  //     }
-  //   })
-  //   .then((data) => {
-  //     console.log(data);
-  //     console.log("Transcribe found !");
-  //     updateTranscribeDOM(data);
-  //     getWholeTruth();
-  //     getStockTip();
+      const keys = Object.keys(data.claims);
+      const filteredKeys = keys.filter((key) => key !== "username");
 
-  //     const keys = Object.keys(data.claims);
-  //     const filteredKeys = keys.filter((key) => key !== "username");
-
-  //     getCredibility(data.thesis.username, filteredKeys);
-  //   })
-  //   .catch((error) => console.error("Error:", error));
+      getCredibility(data.thesis.username, filteredKeys);
+      getSuggestiveTone();
+    })
+    .catch((error) => console.error("Error:", error));
 };
 
 function getWholeTruth() {
@@ -293,6 +294,39 @@ function getCredibility(name, stocks) {
     Math.floor(Math.random() * 10) + 2;
 }
 
+function getSuggestiveTone() {
+  const suggestiveToneDiv = document.getElementById("suggestive-tone");
+  suggestiveToneDiv.innerHTML = `❌ Influencers tend to use emotional triggers or pursuasive messages
+  to get more traction. Be vigilant! <br /><br />
+
+  <p>
+    <b class="timestamp">1:30</b> <b>"Absolutely possible"</b>
+    <br />
+    <i
+      >"can this small cap pharma stock go from tomorrow become midcap
+      or largecap stock? Can this 700 rupees stock go to 3000 level
+      2000 level? yes it is infact <b>absolutely possible</b>"</i
+    >
+  </p>
+  <p>
+    <b class="timestamp">11:38</b>
+    <b>"Extremely high fundamentals"</b>
+    <br />
+    <i
+      >"They have shown they are highly profitable, with
+      <b>extremly high fundamentals</b>, with good margins"</i
+    >
+  </p>
+  <p>
+    <b class="timestamp">13:15</b> <b>"Favorite stock"</b>
+    <br />
+    <i
+      >"This is one of my <b>favorite stock</b>, this is not a stock
+      recommendation, will make a video on this"</i
+    >
+  </p>`;
+}
+
 const updateTranscribeDOM = (data) => {
   document.getElementById("not-transcribed").style.display = "none";
   document.getElementById("transcribed").style.display = "block";
@@ -315,6 +349,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const stockTipsButton = document.getElementById("stock-tips-button");
   const backTestButton = document.getElementById("back-test-button");
   const credibilityButton = document.getElementById("credibility-button");
+  const suggestiveToneButton = document.getElementById(
+    "suggestive-tone-button"
+  );
 
   claimsButton.addEventListener("click", function () {
     openCity("claims");
@@ -323,6 +360,7 @@ document.addEventListener("DOMContentLoaded", function () {
     stockTipsButton.classList.remove("nav-selected");
     backTestButton.classList.remove("nav-selected");
     credibilityButton.classList.remove("nav-selected");
+    suggestiveToneButton.classList.remove("nav-selected");
 
     claimsButton.classList.add("nav-selected");
   });
@@ -334,6 +372,7 @@ document.addEventListener("DOMContentLoaded", function () {
     stockTipsButton.classList.remove("nav-selected");
     backTestButton.classList.remove("nav-selected");
     credibilityButton.classList.remove("nav-selected");
+    suggestiveToneButton.classList.remove("nav-selected");
 
     thesisButton.classList.add("nav-selected");
   });
@@ -345,6 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
     stockTipsButton.classList.remove("nav-selected");
     backTestButton.classList.remove("nav-selected");
     credibilityButton.classList.remove("nav-selected");
+    suggestiveToneButton.classList.remove("nav-selected");
 
     stockTipsButton.classList.add("nav-selected");
   });
@@ -356,6 +396,7 @@ document.addEventListener("DOMContentLoaded", function () {
     stockTipsButton.classList.remove("nav-selected");
     backTestButton.classList.remove("nav-selected");
     credibilityButton.classList.remove("nav-selected");
+    suggestiveToneButton.classList.remove("nav-selected");
 
     backTestButton.classList.add("nav-selected");
   });
@@ -367,8 +408,21 @@ document.addEventListener("DOMContentLoaded", function () {
     stockTipsButton.classList.remove("nav-selected");
     backTestButton.classList.remove("nav-selected");
     credibilityButton.classList.remove("nav-selected");
+    suggestiveToneButton.classList.remove("nav-selected");
 
     credibilityButton.classList.add("nav-selected");
+  });
+
+  suggestiveToneButton.addEventListener("click", function () {
+    openCity("suggestive-tone");
+    claimsButton.classList.remove("nav-selected");
+    thesisButton.classList.remove("nav-selected");
+    stockTipsButton.classList.remove("nav-selected");
+    backTestButton.classList.remove("nav-selected");
+    credibilityButton.classList.remove("nav-selected");
+    suggestiveToneButton.classList.remove("nav-selected");
+
+    suggestiveToneButton.classList.add("nav-selected");
   });
 });
 

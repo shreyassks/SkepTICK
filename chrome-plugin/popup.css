@@ -167,6 +167,7 @@ body {
 
 #credibility p {
     margin: 2em auto;
+    text-align: justify;
 }
 
 #thesis {
@@ -175,6 +176,14 @@ body {
 
 #thesis li {
     margin-bottom: 3em;
+}
+
+#suggestive-tone {
+    padding: 2em 0;
+}
+
+#suggestive-tone p {
+    margin-bottom: 2.5em;
 }
 
 #claims li {
@@ -189,6 +198,12 @@ body {
     align-items: center;
 }
 
+
+.timestamp {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
 
 
 /* #thesis ul {
