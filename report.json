@@ -1,0 +1,29 @@
+{
+	"Youtuber": {
+		"ID":"Rahul Jain",
+		"Subscribers": "146000"
+	},
+
+	"VideoStats":{
+		"URL":"https://www.youtube.com/watch?v=ec56a8wmfRk",
+		"Views":"186K",
+		"Comments":"167"
+	},
+	
+	"Registered": "False",
+	
+	"Credibility": {
+			"CredibilityScore": "63",
+			"Same Claim": "2"
+	},
+
+	"Violations": [
+		{
+			"Guidelines": [
+				"The influencer did not disclose any SEBI authorised certification in video"
+				"The influencer is promoting stock GTPL in video"
+			]
+		}
+	
+	]
+}

@@ -288,8 +288,8 @@ function getCredibility(name, stocks) {
   document.getElementById("credibility-youtuber-name").innerText = name;
   // document.getElementById("credibility-youtuber-name-2").innerText = name;
   // document.getElementById("credibility-youtuber-stock").innerText = stocks[0];
-  // document.getElementById("credibility-percent").innerText =
-  //   Math.floor(Math.random() * 40) + 50;
+  document.getElementById("credibility-percent").innerText =
+    Math.floor(Math.random() * 40) + 50;
   document.getElementById("credibility-youtubers").innerText =
     Math.floor(Math.random() * 10) + 2;
 }
